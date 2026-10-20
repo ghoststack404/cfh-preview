@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="g_SH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#701A75" />
+      <stop offset="100%" stop-color="#D946EF" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="40" fill="url(#g_SH)" />
+  <circle cx="80" cy="58" r="30" fill="#F5D0FE" />
+  <path d="M30 145 C30 110 52 98 80 98 C108 98 130 110 130 145 Z" fill="#F5D0FE" opacity="0.9" />
+  <text x="80" y="67" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="900" fill="#701A75">SH</text>
+</svg>

@@ -1,0 +1,63 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production
+.env.production.local
+
+# Testing
+coverage
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+.next/
+out/
+build
+dist
+
+# Debug & Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Misc & OS
+.DS_Store
+Thumbs.db
+*.pem
+*.traineddata
+scratch/
+
+# Archives & Temporary files
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+.tmp/
+apps/web/.tmp/
+*.tmp
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# AI Agent Workspaces & Prompts
+.agents/
+agents/
+GEMINI.md
+ORIGINAL_REQUEST.md
+TEST_READY.md
+

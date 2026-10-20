@@ -1,0 +1,58 @@
+services:
+  web:
+    image: node:22-alpine
+    container_name: cfh_web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/web/node_modules
+    working_dir: /app
+    environment:
+      - DATABASE_URL=mysql://cfh:cfh_dev_password@mysql:3306/coaching_from_home
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=fallback_secret_for_development
+    command: >
+      sh -c "npm install && 
+             npx prisma generate --schema=apps/web/prisma/schema.prisma && 
+             npm run dev --workspace=apps/web"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: coaching_from_home
+      MYSQL_USER: cfh
+      MYSQL_PASSWORD: cfh_dev_password
+      MYSQL_ROOT_PASSWORD: root_password
+    command: ["--max_connections=500", "--wait_timeout=300", "--interactive_timeout=300"]
+    ports:
+      - "3307:3306"
+    volumes:
+      - cfh_mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  mailpit:
+    image: axllent/mailpit:v1.30.0
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_MAX_MESSAGES: 500
+      MP_DATABASE: /data/mailpit.db
+    volumes:
+      - cfh_mailpit:/data
+
+volumes:
+  cfh_mysql:
+  cfh_mailpit:

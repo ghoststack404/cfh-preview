@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F4F9F9;
+  --foreground: #2D4A5E;
+  --surface: #FFFFFF;
+  --surface-secondary: #F8FAFC;
+  --border: #E2E8F0;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #020617;
+  --foreground: #F1F5F9;
+  --surface: #0F172A;
+  --surface-secondary: #1E293B;
+  --border: #1E293B;
+  color-scheme: dark;
+}
+
+html {
+  font-size: 16px;
+  overflow-x: clip;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 16.5px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+body {
+  overflow-x: clip;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Transición suave, uniforme y perfectamente sincronizada para cambio de modo claro / oscuro */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+@layer utilities {
+  .bg-theme-bg {
+    background-color: var(--background);
+  }
+  .bg-theme-surface {
+    background-color: var(--surface);
+  }
+  .text-theme-fg {
+    color: var(--foreground);
+  }
+  .border-theme {
+    border-color: var(--border);
+  }
+  /* Ocultar barra de desplazamiento manteniendo funcionalidad de scroll */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Scrollbar estilizado para menús desplegables */
+  .cfh-dropdown-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #475569 transparent;
+  }
+  .cfh-dropdown-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .cfh-dropdown-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .cfh-dropdown-scroll::-webkit-scrollbar-thumb {
+    background-color: #475569;
+    border-radius: 9999px;
+  }
+  .cfh-dropdown-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #64748b;
+  }
+  .cfh-dropdown-scroll::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+/* Animaciones de carrusel continuo (Marquee fluido acelerado por hardware) */
+@keyframes cfh-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes cfh-marquee-reverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex !important;
+  width: max-content !important;
+  animation: cfh-marquee 30s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-marquee-reverse {
+  display: flex !important;
+  width: max-content !important;
+  animation: cfh-marquee-reverse 30s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-marquee-slow {
+  display: flex !important;
+  width: max-content !important;
+  animation: cfh-marquee 70s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-marquee-slow-reverse {
+  display: flex !important;
+  width: max-content !important;
+  animation: cfh-marquee-reverse 70s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-marquee:hover,
+.animate-marquee-reverse:hover,
+.animate-marquee-slow:hover,
+.animate-marquee-slow-reverse:hover {
+  animation-play-state: paused !important;
+}
+
